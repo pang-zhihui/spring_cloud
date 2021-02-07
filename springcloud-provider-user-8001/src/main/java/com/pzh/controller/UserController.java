@@ -14,7 +14,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import sun.security.util.Password;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Time: 2020/7/15
@@ -37,7 +39,9 @@ public class UserController {
     @GetMapping("/user/get/{id}")
     @ApiOperation("查询单个用户")
     public User queryUser(@PathVariable("id") int id){
-        return userService.queryUser(id);
+        Map<String,Object> map = new HashMap<>();
+        map.put("id",id);
+        return userService.queryUser(map);
     }
 
     @GetMapping("/user/get")

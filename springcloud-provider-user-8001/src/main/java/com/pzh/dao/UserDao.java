@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Time: 2020/7/15
@@ -16,7 +17,7 @@ import java.util.List;
 public interface UserDao {
     public void addUser(User user);
 
-    public User queryUser(int id);
+    public User queryUser(Map map);
 
     public List<User> queryUserList();
 }

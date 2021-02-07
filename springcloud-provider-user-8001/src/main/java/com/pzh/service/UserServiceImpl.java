@@ -5,11 +5,9 @@ import com.pzh.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import util.SnowFlake;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Time: 2020/7/15
@@ -24,14 +22,14 @@ public class UserServiceImpl implements UserService{
     @Override
     public void addUser(String username,String password,String identity) {
         User user = new User();
-        int id = new Random().nextInt(999999)+1;
+        int id = (int) new SnowFlake(2,3).nextId();
         user.setUsername(username).setPassword(password).setId(id).setIdentity(identity).setRegistTime(new Date()).setCem("");
         userDao.addUser(user);
     }
 
     @Override
-    public User queryUser(int id) {
-        return userDao.queryUser(id);
+    public User queryUser(Map map) {
+        return userDao.queryUser(map);
     }
 
     @Override

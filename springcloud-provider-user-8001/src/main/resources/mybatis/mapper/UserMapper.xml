@@ -6,10 +6,19 @@
     <insert id="addUser" parameterType="User">
         insert into user values(#{id},#{username},#{password},#{registTime},#{identity})
     </insert>
-    <select id="queryUser" resultType="User">
-        select * from user where id=#{id}
+    <select id="queryUser" resultType="User" parameterType="int">
+        select * from user
+        <where>
+            <include refid="sql_common"></include>
+        </where>
     </select>
     <select id="queryUserList" resultType="User">
         select * from user
     </select>
+
+    <sql id="sql_common">
+        <if test="id != null">
+           id = #{id}
+        </if>
+    </sql>
 </mapper>
